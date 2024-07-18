@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.practice01.mappers.GoodsMapper">
+    <select id="pickAll" resultType="goodsDTO">
+        <!--두개 테이블 inner join했을 때 다른 테이블 정보 갖고오고싶으면 DTO에 멤버로 추가-->
+        <!--DTO와 DB컬럼명 : DTO에서는 카멜,DB에서는 underscore표기법 사용하면 자동 매핑해줌 - xml파일의 settings-->
+        SELECT * FROM goods
+        INNER JOIN category
+        ON goods.goods_category = category.id
+    </select>
+    <select id="pickOne" parameterType="int" resultType="goodsDTO">
+        SELECT * FROM goods
+        INNER JOIN category
+        ON goods.goods_category = category.id
+        WHERE goods.id = #{id}
+    </select>
+    <select id="totalEA" resultType="int">
+        SELECT count(id) FROM goods;
+    </select>
+    <!--    <select id="selectOneByCategory" parameterType="int" resultType="goodsDTO">-->
+    <!--        SELECT * FROM goods-->
+    <!--        WHERE category = #{id}는 category.id;-->
+    <!--    </select>-->
+</mapper>

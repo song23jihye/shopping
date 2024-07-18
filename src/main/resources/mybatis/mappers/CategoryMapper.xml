@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.practice01.mappers.CategoryMapper">
+<!--    <select id="selectAll" parameterType="categoryDTO" resultType="categoryDTO">-->
+<!--        SELECT * FROM category;-->
+<!--    </select>-->
+    <select id="pickCategoryName" parameterType="int" resultType="categoryDTO">
+        SELECT * FROM category
+        WHERE id = #{id}
+    </select>
+</mapper>

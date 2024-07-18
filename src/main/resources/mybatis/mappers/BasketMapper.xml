@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.practice01.mappers.BasketMapper">
+<!--    <select id="pickOneBasket" parameterType="int" resultType="basketDTO">-->
+<!--        SELECT * FROM basket-->
+<!--        WHERE basket.cus_id = #{id}-->
+<!--    </select>-->
+    <select id="pickOneBasket" parameterType="int" resultType="basketDTO">
+        SELECT basket.*, shopuser.nickname FROM basket
+        INNER JOIN shopuser
+        ON basket.cus_id = shopuser.id
+        INNER JOIN goods
+        ON basket.goods_id = goods.id
+        WHERE basket.cus_id = #{id}
+    </select>
+    <select id="goodsNumSearch" parameterType="int" resultType="int">
+        SELECT goods_id FROM basket
+        WHERE cus_id = #{cusid};
+    </select>
+    <insert id="insert1_newItem" parameterType="Map"> <!--새상품-->
+        INSERT INTO basket(cus_id, goods_id, goods_name, goods_count, goods_price)
+        VALUES(#{customerNum},#{goodsPutDTO.id},#{goodsPutDTO.name}, 1, #{goodsPutDTO.price})
+    </insert>
+    <update id="insert2_oldItem" parameterType="Map"> <!--수량 + 1-->
+        UPDATE basket
+        SET goods_count = goods_count + 1
+        WHERE goods_id = #{goodPutId} AND cus_id=#{customerNum};
+    </update>
+<!--    <select id="deleteoldItem" parameterType="Hashmap"> &lt;!&ndash;수량 - 1&ndash;&gt;-->
+<!--        UPDATE basket-->
+<!--        SET goods_count = goods_count - 1-->
+<!--        WHERE goods_id = #{goodsid} AND cus_id=#{cusid};-->
+<!--    </select>-->
+
+</mapper>

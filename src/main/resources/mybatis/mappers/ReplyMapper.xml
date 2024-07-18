@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.practice01.mappers.ReplyMapper">
+    <select id="selectAll" resultType="replyDTO" parameterType="int">
+        SELECT reply.* FROM reply
+        INNER JOIN shopuser
+        ON reply.goods_id = shopuser.id
+        WHERE goods_id = #{goodsId};
+    </select>
+
+    <select id="selectOne" resultType="replyDTO" parameterType="int">
+        SELECT * FROM reply
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="replyDTO">
+        INSERT INTO reply(content, entry_date, modify_date, goods_id, writer_id, writer_nickname)
+        VALUES(#{content}, NOW(), NOW(), #{goodsId}, #{writerId}, #{writerNickname})
+    </insert>
+<!--    <insert id="replyInsert" parameterType="replyDTO"> #reply of reply-->
+<!--        INSERT INTO reply(content, parent_rep_id, entry_date, modify_date, goods_id, writer_id, writer_nickname)-->
+<!--        VALUES(#{content}, #{},NOW(), NOW(), #{goodsId}, #{writerId}, #{writerNickname})-->
+<!--    </insert>-->
+
+</mapper>

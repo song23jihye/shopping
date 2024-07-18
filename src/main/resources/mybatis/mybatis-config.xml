@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/> <!--DB에서는 _, DTO에서는 _대신 대문자로 알아서 매핑-->
+    </settings>
+    <typeAliases>
+        <typeAlias type="org.spring.practice01.shopping.model.GoodsDTO" alias="goodsDTO"/>
+        <typeAlias type="org.spring.practice01.shopping.model.UserDTO" alias="userDTO"/>
+        <typeAlias type="org.spring.practice01.shopping.model.CategoryDTO" alias="categoryDTO"/>
+        <typeAlias type="org.spring.practice01.shopping.model.BasketDTO" alias="basketDTO"/>
+        <typeAlias type="org.spring.practice01.shopping.model.AddressDTO" alias="addressDTO"/>
+        <typeAlias type="org.spring.practice01.shopping.model.ReplyDTO" alias="replyDTO"/>
+    </typeAliases>
+</configuration>
